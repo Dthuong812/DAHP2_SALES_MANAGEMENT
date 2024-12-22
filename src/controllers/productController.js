@@ -112,7 +112,7 @@ module.exports = {
             discount_start,
             discount_end
         } = req.body;
-        let imageUrl = "";
+        let imageUrl = undefined;
         console.log(product_id, name, price, stock_quantity, category_id, description, discount, discount_start, discount_end)
         if (!req.files || Object.keys(req.files).length === 0) {} else {
             let result = await uploadSingleFile(req.files.image);

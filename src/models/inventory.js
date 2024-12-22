@@ -6,21 +6,9 @@ const InventorySchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    warehouse_id: {
-        type: String,
-        ref : "Warehouse",
-        required: true
-    },
     product_id: {
         type: String,
         ref: 'Product',
-        required: true
-    },
-    change_type: {
-        type: String,
-        enum: [
-            'Nhập', 'Bán'
-        ],
         required: true
     },
     purchaseOrder_id: {

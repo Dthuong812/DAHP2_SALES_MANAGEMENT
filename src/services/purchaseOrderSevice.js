@@ -27,7 +27,7 @@ module.exports={
             let lastIdNumber = lastPurchaseOrder ? parseInt(lastPurchaseOrder.purchaseOrder_id.slice(2), 10) : 0;
     
             const validPurchaseOrders = arr.filter(purchaseOrder => {
-                return purchaseOrder.status && purchaseOrder.supplier && purchaseOrder.warehouse_id && purchaseOrder.total_amount;
+                return purchaseOrder.status && purchaseOrder.supplier_id && purchaseOrder.warehouse_id && purchaseOrder.total_amount;
             });
             validPurchaseOrders.forEach(purchaseOrder => {
                 lastIdNumber += 1;
@@ -48,8 +48,8 @@ module.exports={
     getAllPurchaseOrderService:async (limit, page, queryString) => {
         try {
             let result = null;
-            limit = parseInt(limit, 10) || 10; 
-            page = parseInt(page, 10) || 1; 
+            limit = parseInt(limit, 10) ; 
+            page = parseInt(page, 10) ; 
     
             let offset = (page - 1) * limit;
     
@@ -64,9 +64,9 @@ module.exports={
             return null;
         }
     },
-    updatePurchaseOrderService:async(purchaseOrder_id, supplier, warehouse_id, total_amount, status)=>{
+    updatePurchaseOrderService:async(purchaseOrder_id, supplier_id, total_amount)=>{
         try {
-            let result = await PurchaseOrder.updateOne({purchaseOrder_id:purchaseOrder_id},{supplier, warehouse_id, total_amount, status})
+            let result = await PurchaseOrder.updateOne({purchaseOrder_id:purchaseOrder_id},{supplier_id, total_amount})
             return result
         } catch (error) {
             console.log(error)

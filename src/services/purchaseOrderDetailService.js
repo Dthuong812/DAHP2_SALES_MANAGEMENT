@@ -63,8 +63,8 @@ module.exports = {
     getAllPurchaseOrderDetailService:async (limit, page, queryString) => {
         try {
             let result = null;
-            limit = parseInt(limit, 10) || 10; 
-            page = parseInt(page, 10) || 1; 
+            limit = parseInt(limit, 10) ; 
+            page = parseInt(page, 10) ; 
     
             let offset = (page - 1) * limit;
     

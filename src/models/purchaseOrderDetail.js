@@ -26,10 +26,6 @@ const PurchaseOrderDetailSchema = new mongoose.Schema({
     },
     subtotal: {
         type: Number,
-        required: true,
-        default: function () {
-            return this.quantity * this.unit_cost;
-        }
     }
 }, {timestamps: true});
 PurchaseOrderDetailSchema.plugin(mongoose_delete, {overrideMethods: "all"});

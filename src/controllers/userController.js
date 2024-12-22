@@ -1,5 +1,6 @@
 const fs = require('fs')
 const jwt = require('jsonwebtoken'); 
+const { createUserService } = require('../services/userService');
 module.exports = {
     //authentication
     postLogin:async(req,res,next)=>{
@@ -22,7 +23,15 @@ module.exports = {
         });
     },
     createUser:async(req,res)=>{
-        
-    }
+        let {
+            email,
+            password}= req.body
+            console.log(email,
+                password)
+            let userData = {email,password}
+            let user = await createUserService(userData)
+            return res.status(200).json({errorCode: 0, data: user})
+        }
+      
 }
 

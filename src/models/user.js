@@ -25,18 +25,6 @@ const userSchema = new mongoose.Schema({
         type: String,
          required: true
     },
-    image: String,
-    phone:Number,
-    address:String,
-    role_id :{
-        type : String,
-        ref: 'Role',
-        required : true,
-    },
-    firstLogin: {
-        type: Boolean,
-        default: true, 
-      },
 },
 {
     timestamps: true

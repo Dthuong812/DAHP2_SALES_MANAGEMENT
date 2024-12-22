@@ -104,7 +104,8 @@ module.exports ={
             const query = {
                 $or: [
                     { name: { $regex: searchKeyword, $options: 'i' } }, 
-                    { phone: { $regex: searchKeyword, $options: 'i' } } 
+                    { phone: { $regex: searchKeyword, $options: 'i' } } ,
+                    { address: { $regex: searchKeyword, $options: 'i' } } 
                 ]
             };
     

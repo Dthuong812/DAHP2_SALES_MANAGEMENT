@@ -1,4 +1,4 @@
-const {createCategoryAPI ,getAllCategoryService,updateCategoryService,deleteCategoryService,createArrayCategoryService,deleteArrayCategoryService} = require('../services/categoryService')
+const {createCategoryAPI ,getAllCategoryService,updateCategoryService,deleteCategoryService,createArrayCategoryService,deleteArrayCategoryService, searchCategoryAPIService} = require('../services/categoryService')
 module.exports ={
     postCreateCategory :async(req,res)=>{
         let {category_id,name} = req.body
@@ -42,6 +42,27 @@ module.exports ={
         } catch (error) {
             console.error("Error in getAllCategory:", error);
             return res.status(500).json({ errorCode: 1, message: "Internal Server Error" });
+        }
+    },
+    searchCategoryAPI:async (req, res) => {
+        const { name, limit, page } = req.query;
+    
+        if (!name || name.trim() === '') {
+            return res.status(400).json({
+                success: false,
+                message: 'Keyword cannot be empty.'
+            });
+        }
+    
+        const result = await searchCategoryAPIService(name, parseInt(limit) || 10, parseInt(page) || 1);
+    
+        if (result.success) {
+            return res.status(200).json(result);
+        } else {
+            return res.status(500).json({
+                success: false,
+                message: result.message
+            });
         }
     },
     putCategory : async(req,res)=>{

@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 const { uploadSingleFile, uploadMultipleFiles } = require('../services/fileService');
 
 const postUploadSingleFileAPI = async (req, res) => {
@@ -27,8 +29,23 @@ const postUploadMultipleFileAPI = async (req, res) => {
         return await postUploadSingleFileAPI(req, res);
     }
 };
+const getImageAPI = async (req, res) => {
+    const imageName = req.params.imageName;
+    console.log(imageName)
+    const imagePath = path.join(__dirname, '../public/images/upload', imageName);
+
+    if (fs.existsSync(imagePath)) {
+        res.sendFile(imagePath);
+    } else {
+        res.status(404).json({
+            errorCode: 1,
+            message: 'Image not found'
+        });
+    }
+};
 
 module.exports = {
     postUploadSingleFileAPI,
-    postUploadMultipleFileAPI
+    postUploadMultipleFileAPI,
+    getImageAPI
 };

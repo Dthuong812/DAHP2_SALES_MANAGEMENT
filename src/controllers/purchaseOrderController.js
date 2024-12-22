@@ -4,18 +4,18 @@ module.exports = {
     createPurchaseOrderController: async (req, res) => {
         let {
             purchaseOrder_id,
-            supplier,
-            warehouse_id,
+            supplier_id,
+            
             total_amount,
-            status
+           
         } = req.body;
-        console.log(purchaseOrder_id, supplier, warehouse_id, total_amount, status)
+        console.log(purchaseOrder_id, supplier_id,  total_amount)
         let purchaseOrderData = {
             purchaseOrder_id,
-            supplier,
-            warehouse_id,
+            supplier_id,
+            
             total_amount,
-            status
+           
         };
         let purchaseOrder = await createPurchaseOrderService(purchaseOrderData)
         return res.status(200).json({errorCode: 0, data: purchaseOrder})
@@ -56,12 +56,11 @@ module.exports = {
     updatePurchaseOrderController: async (req, res) => {
         let {
             purchaseOrder_id,
-            supplier,
-            warehouse_id,
+            supplier_id,
+            
             total_amount,
-            status
         } = req.body;
-        let purchaseOrder = await updatePurchaseOrderService(purchaseOrder_id, supplier, warehouse_id, total_amount, status)
+        let purchaseOrder = await updatePurchaseOrderService(purchaseOrder_id, supplier_id,  total_amount)
         return res.status(200).json({errorCode: 0, data: purchaseOrder})
     },
     deletePurchaseOrderController: async (req, res) => {

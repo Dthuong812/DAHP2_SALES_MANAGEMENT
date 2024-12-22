@@ -70,6 +70,34 @@ module.exports ={
             return null;
         }
     },
+    searchCategoryAPIService: async (searchKeyword, limit, page) => {
+        try {
+            const query = {
+                     name: { $regex: searchKeyword, $options: 'i' } , 
+            };
+    
+            limit = parseInt(limit, 10) || 10; 
+            page = parseInt(page, 10) || 1; 
+    
+            const categories = await Category.find(query)
+                .limit(limit)
+                .skip((page - 1) * limit)
+                .exec();
+    
+            const total = await Category.countDocuments(query);
+    
+            return {
+                success: true,
+                data: categories,
+                total,
+                page,
+                limit
+            };
+        } catch (error) {
+            console.error('Error in searchCategoryAPIService:', error);
+            return { success: false, message: error.message };
+        }
+    },
     updateCategoryService :async(name,category_id)=>{
         try {
             let result = await Category.updateOne({category_id:category_id},{name})
