@@ -39,7 +39,7 @@ const Resources = require('./models/resources');
 
 // config req.body
 app.use(express.json())
-app.use(cors({origin: process.env.URL_REACT}))
+app.use(cors({origin: 'http://localhost:3000'}))
 app.use(express.urlencoded({extended: true}))
 
 // config template engine
