@@ -1,5 +1,5 @@
 const { default: aqp } = require('api-query-params');
-const Inventory = require('../models/Inventory');
+const Inventory = require('../models/inventory');
 
 module.exports = {
     createInventoryService: async (inventoryData) => {
